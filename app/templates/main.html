@@ -8,6 +8,17 @@
   </head>
   <body>
     <h1>Calendar Working</h1>
+    <form method="POST" , action="/">
+      {{form.csrf_token}}
+      <p>{{ form.name.label }}: {{ form.name }}</p>
+      <p>{{ form.start_date.label }}: {{ form.start_date }}</p>
+      <p>{{ form.start_time.label }}: {{ form.start_time }}</p>
+      <p>{{ form.end_date.label }}: {{ form.end_date }}</p>
+      <p>{{ form.end_time.label }}: {{ form.end_time }}</p>
+      <p>{{ form.description.label }}: {{ form.description }}</p>
+      <p>{{ form.private.label }}: {{ form.private }}</p>
+      <p>{{ form.submit }}</p>
+    </form>
     <table>
       <thead>
         <tr>
@@ -18,9 +29,11 @@
       </thead>
       <tbody>
         {% for row in rows %}
-        <td>{{ row.name }}</td>
-        <td>{{ row.start_date_abv }}</td>
-        <td>{{ row.end_date_abv }}</td>
+        <tr>
+          <td>{{ row.name }}</td>
+          <td>{{ row.start_date_abv }}</td>
+          <td>{{ row.end_date_abv }}</td>
+        </tr>
         {% endfor %}
       </tbody>
     </table>
