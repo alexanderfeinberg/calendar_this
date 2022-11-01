@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 import sqlite3
 
 
@@ -35,10 +35,13 @@ def format_appointments(appointments):
     return appt_list
 
 
-def load_data(DB_FILE):
+def load_data(DB_FILE, year, month, day):
+    date = datetime(int(year), int(month), int(day))
+    delta = timedelta(days=1)
+    next_day = date+delta
     with sqlite3.connect(DB_FILE) as conn:
         curs = conn.cursor()
         curs.execute(
-            'SELECT id, name, start_datetime, end_datetime FROM appointments ORDER BY start_datetime')
+            'SELECT id, name, start_datetime, end_datetime FROM appointments WHERE start_datetime BETWEEN :date AND :next_day ORDER BY start_datetime', {'date': date, 'next_day': next_day})
         appointments = curs.fetchall()
     return appointments
