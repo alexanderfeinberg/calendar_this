@@ -8,5 +8,21 @@
   </head>
   <body>
     <h1>Calendar Working</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Start</th>
+          <th>End</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in rows %}
+        <td>{{ row.name }}</td>
+        <td>{{ row.start_date_abv }}</td>
+        <td>{{ row.end_date_abv }}</td>
+        {% endfor %}
+      </tbody>
+    </table>
   </body>
 </html>
